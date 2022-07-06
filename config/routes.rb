@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  
+
   resources :tutors
   resources :students
   resources :meetings
 
-  get '/hello', to: 'application#hello_world'
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

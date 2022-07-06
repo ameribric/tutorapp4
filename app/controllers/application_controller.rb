@@ -3,17 +3,16 @@ class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
   
-    before_action :authorized
+    # before_action :authorized
 
    
-    def hello_world
-        session[:count] = (session[:count] || 0) + 1
-        render json: { count: session[:count] }
-    end
+ 
+    # def authorized
+    #     return render json:{error: "Not authorized"}, status: :unauthorized 
+    #   end
 
-    def authorized
-        return render json:{error: "Not authorized"}, status: :unauthorized 
-      end
+    # IF I UNCOMMENT ABOVE, I AND DO AN INDEX GET REQUEST FOR ANY OF THE 
+    # THINGS IN MY DATABASE, I GET AN ERROR THAT SAYS {error: "Not authorized"}
       
       def render_not_found
           render json: { error: "Not found" }, status: :not_found
