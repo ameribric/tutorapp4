@@ -4,3 +4,7 @@ class FallbackController < ActionController::Base
     end
   end
   
+
+# Controller logic: fallback requests for React Router.
+# Leave this here to help deploy your app later!
+# I ALREADY DEPLOYED MY APP!
