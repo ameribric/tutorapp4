@@ -1,18 +1,34 @@
 import Search from './Search'
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Navbar({user, setUser}) {
+function NavBar({ user, setUser }) {
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
+  }
 
-    return (
+  return (
+    <header>
+        <Search/>
+      <div>
+        <Link to="/">Home</Link>
+      </div>
+      <div>
+        {user ? (
+          <button onClick={handleLogoutClick}>Logout</button>
+        ) : (
+          <>
+            <Link to="/signup">Signup</Link>
+            <Link to="/login">Login</Link>
+          </>
+        )}
+      </div>
+    </header>
+  );
+}
 
-        <>
-        <Search />
-    <div>
-        Hello, from Navbar!
-    </div>
-
-    </>
-
-    );
-    }
-    
-export default Navbar;
+export default NavBar;
