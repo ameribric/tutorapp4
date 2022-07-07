@@ -1,6 +1,6 @@
 import Search from './Search'
 
-function Navbar() {
+function Navbar({user, setUser}) {
 
     return (
 

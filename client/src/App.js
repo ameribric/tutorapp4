@@ -30,11 +30,13 @@ function App() {
       <Navbar user={user} setUser={setUser} />
       <Sidebar />
       <Main />
-      <Home />
+      <Home user={user} />
+      <Login user={user} setUser={setUser} />
+
       <main>
         <Switch>
           <Route path="/new">
-            <NewMeeting user={user} />
+            <NewMeeting user={user.full_name} />
           </Route>
           <Route path="/">
             <MeetingList />

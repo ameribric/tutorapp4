@@ -28,7 +28,7 @@ class TutorsController < ApplicationController
 
     private
     def tutor_params
-        params.permit(:full_name, :subject, :price, :rating, :email, :password_digest)
+        params.permit(:full_name, :subject, :price, :rating, :email, :password)
     end
 
 end
