@@ -80,9 +80,10 @@ function App() {
       <MeetingList 
       onDeleteMeeting={handleDeleteMeeting} 
       onUpdateMeeting={handleUpdateMeeting}
+      meetings={meetings}
       />
 
-      {/* <div>
+      <div>
        <Switch>
           <Route path="/new">
             <NewMeeting user={user} handleAddMeeting={handleAddMeeting}/>
@@ -91,7 +92,7 @@ function App() {
             <MeetingList />
           </Route>
         </Switch>
-      </div> */}
+      </div>
     </>
   );
 }

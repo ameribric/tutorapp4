@@ -1,13 +1,17 @@
 // import React, { useState } from "react";
 
-function MeetingList({ meeting, onDeleteMeeting}) {
+function MeetingList({ meetings, onDeleteMeeting, id}) {
   // const [updatedTime, setUpdatedTime] = useState("");
 
+
+  //THIS WORKS!!! But not dynamically, racheal said to make sure this below is connected to the backend 
+  //by making sure that the get request for meetings is linked to the backend
+  
   function handleDeleteClick() {
-    fetch(`meetings/${meeting.id}`, {
+    fetch(`meetings/${meetings.id}`, {
       method: "DELETE",
     });
-    onDeleteMeeting(meeting.id);
+    onDeleteMeeting(meetings.id);
   }
 
   // function handleTimeFormSubmit(e) {
