@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch("meetings")
+    fetch("/meetings")
       .then((r) => r.json())
       .then((meetingsArray) => {
         setMeetings(meetingsArray);
@@ -63,10 +63,10 @@ function App() {
 
   return (
     <>
-       {/* <Navbar user={user} setUser={setUser} /> 
+      <Navbar user={user} setUser={setUser} /> 
       <Sidebar />
       <Main />
-      <Home user={user} />  */}
+      <Home user={user} /> 
       <Login />
       <Signup setUser={setUser} />
       <NewMeeting onAddMeeting={handleAddMeeting}/>
@@ -78,14 +78,14 @@ function App() {
       />
 
       <div>
-        {/* <Switch>
+       <Switch>
           <Route path="/new">
-            <NewMeeting user={user} />
+            <NewMeeting user={user} handleAddMeeting={handleAddMeeting}/>
           </Route>
           <Route path="/meetinglist">
             <MeetingList />
           </Route>
-        </Switch> */}
+        </Switch>
       </div>
     </>
   );

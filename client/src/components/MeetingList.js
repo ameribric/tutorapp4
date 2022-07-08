@@ -8,7 +8,7 @@ function MeetingList({ meeting, onDeleteMeeting, onUpdateMeeting }) {
 
 
   function handleDeleteClick() {
-    fetch(`http://localhost:6001/plants/${id}`, {
+    fetch(`meetings/${id}`, {
       method: "DELETE",
     });
 
@@ -29,6 +29,8 @@ function MeetingList({ meeting, onDeleteMeeting, onUpdateMeeting }) {
         onUpdateMeeting(updatedMeeting);
       });
   }
+
+  
 
   return (
     <li className="card">

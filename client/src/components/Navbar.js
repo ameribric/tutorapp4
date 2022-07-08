@@ -1,6 +1,6 @@
 import Search from './Search'
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function NavBar({ user, setUser, searchTerm, onSearchChange }) {
   function handleLogoutClick() {
@@ -15,7 +15,8 @@ function NavBar({ user, setUser, searchTerm, onSearchChange }) {
     <header>
         <Search searchTerm={searchTerm} onSearchChange={onSearchChange}/>
       <div>
-        <Link to="/">Home</Link>
+        <NavLink to="/logout" exact>Logout</NavLink>
+        <NavLink to="/search" exact>Search</NavLink>
       </div>
       <div>
         {user ? (
