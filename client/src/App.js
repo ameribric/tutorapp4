@@ -8,12 +8,16 @@ import NewMeeting from './components/NewMeeting'
 import MeetingList from './components/MeetingList'
 import Sidebar from './components/Sidebar'
 import Main from './components/Main'
+import Search from './components/Search'
 
 
 function App() {
   const [user, setUser] = useState(null);
   const [meetings, setMeetings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [tutors, setTutors] = useState([]);
+
+
 
   useEffect(() => {
     // auto-login
@@ -53,8 +57,8 @@ function App() {
     setMeetings(updatedMeetingsArray);
   }
 
-  const displayedMeetings = meetings.filter((meeting) => {
-    return meeting.meeting_name.toLowerCase().includes(searchTerm.toLowerCase());
+  const displayedTutors = tutors.filter((tutor) => {
+    return tutor.full_name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
 
@@ -63,21 +67,22 @@ function App() {
 
   return (
     <>
-      <Navbar user={user} setUser={setUser} /> 
+      <Navbar  /> 
       <Sidebar />
+      <Search tutors={displayedTutors} setTutors={setTutors} searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
+  
       <Main />
       <Home user={user} /> 
       <Login />
       <Signup setUser={setUser} />
       <NewMeeting onAddMeeting={handleAddMeeting}/>
-      <Navbar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <Navbar  />
       <MeetingList 
-      meetings={displayedMeetings} 
       onDeleteMeeting={handleDeleteMeeting} 
       onUpdateMeeting={handleUpdateMeeting}
       />
 
-      <div>
+      {/* <div>
        <Switch>
           <Route path="/new">
             <NewMeeting user={user} handleAddMeeting={handleAddMeeting}/>
@@ -86,7 +91,7 @@ function App() {
             <MeetingList />
           </Route>
         </Switch>
-      </div>
+      </div> */}
     </>
   );
 }

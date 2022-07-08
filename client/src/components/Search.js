@@ -2,6 +2,7 @@
 import React from "react";
 
 function Search({ searchTerm, onSearchChange }) {
+    
   return (
     <div className="searchbar">
       <label htmlFor="search">Search Tutors:</label>

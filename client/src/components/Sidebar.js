@@ -7,7 +7,7 @@ const [tutors, setTutors] = useState([]);
     const allTutors = tutors.map((t) => (
         <TutorList
           key={t.id}
-          tutor={t}
+          tutor={t.full_name}
         />
       ));
 

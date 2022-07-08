@@ -10,7 +10,7 @@ function TutorList({allTutors, tutors, setTutors}) {
       .then((tutors) => {
         setTutors(tutors);
       });
-  }, [setTutors]);
+  }, []);
 
 
 

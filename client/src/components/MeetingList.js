@@ -1,47 +1,40 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-function MeetingList({ meeting, onDeleteMeeting, onUpdateMeeting }) {
-  const { id, time, meeting_name, location, student_id, tutor_id } = meeting;
-
-  const [updatedTime, setUpdatedTime] = useState(time);
-
-
+function MeetingList({ meeting, onDeleteMeeting}) {
+  // const [updatedTime, setUpdatedTime] = useState("");
 
   function handleDeleteClick() {
-    fetch(`meetings/${id}`, {
+    fetch(`meetings/${meeting.id}`, {
       method: "DELETE",
     });
-
-    onDeleteMeeting(id);
+    onDeleteMeeting(meeting.id);
   }
 
-  function handleTimeFormSubmit(e) {
-    e.preventDefault();
-    fetch(`meetings/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ time: updatedTime }),
-    })
-      .then((r) => r.json())
-      .then((updatedMeeting) => {
-        onUpdateMeeting(updatedMeeting);
-      });
-  }
-
-  
+  // function handleTimeFormSubmit(e) {
+  //   e.preventDefault();
+  //   fetch(`meetings/${meeting.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ time: updatedTime }),
+  //   })
+  //     .then((r) => r.json())
+  //     .then((updatedMeeting) => {
+  //       onUpdateMeeting(updatedMeeting);
+  //     });
+  // }
 
   return (
     <li className="card">
-      <h4>{time}</h4>
-      <h4>{meeting_name}</h4>
-      <h4>{location}</h4>
-      <h4>{student_id}</h4>
-      <h4>{tutor_id}</h4>
- 
+      {/* <h4>{meeting.time}</h4>
+      <h4>{meeting.meeting_name}</h4>
+      <h4>{meeting.location}</h4>
+      <h4>{meeting.student_id}</h4>
+      <h4>{meeting.tutor_id}</h4>
+  */}
       <button onClick={handleDeleteClick}>Delete</button>
-      <form onSubmit={handleTimeFormSubmit}>
+      {/* <form onSubmit={handleTimeFormSubmit}>
         <input
           type="text"
           placeholder="New time..."
@@ -49,7 +42,7 @@ function MeetingList({ meeting, onDeleteMeeting, onUpdateMeeting }) {
           onChange={(e) => setUpdatedTime(e.target.value)}
         />
         <button type="submit">Update Time</button>
-      </form>
+      </form> */}
     </li>
   );
 }
