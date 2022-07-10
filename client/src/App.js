@@ -19,6 +19,7 @@ function App() {
 
 
 
+
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
@@ -36,6 +37,14 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch("/tutors")
+      .then((r) => r.json())
+      .then((tutors) => {
+        setTutors(tutors);
+      });
+  }, []);
+
   function handleAddMeeting(newMeeting) {
     const updatedMeetingsArray = [...meetings, newMeeting];
     setMeetings(updatedMeetingsArray);
@@ -43,6 +52,7 @@ function App() {
 
   function handleDeleteMeeting(id) {
     const updatedMeetingsArray = meetings.filter((meeting) => meeting.id !== id);
+    console.log(updatedMeetingsArray, id)
     setMeetings(updatedMeetingsArray);
   }
 
@@ -68,7 +78,7 @@ function App() {
   return (
     <>
       <Navbar  /> 
-      <Sidebar />
+      <Sidebar tutors={displayedTutors} setTutors={setTutors}/>
       <Search tutors={displayedTutors} setTutors={setTutors} searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
   
       <Main />

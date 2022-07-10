@@ -1,16 +1,17 @@
 
-import React, { useEffect } from "react";
-function TutorList({allTutors, tutors, setTutors}) {
+function TutorItem ({ tutor }) {
+    return (
+        <div >
+           <p> {tutor.full_name} </p>
+          <p> {tutor.price} </p> 
+        </div>
+    )
+}
+function TutorList({ tutors }) {
     // const { id, full_name, subject, price, rating } = tutor;
 
 
-  useEffect(() => {
-    fetch("/tutors")
-      .then((r) => r.json())
-      .then((tutors) => {
-        setTutors(tutors);
-      });
-  }, []);
+
 
 
 
@@ -18,7 +19,9 @@ function TutorList({allTutors, tutors, setTutors}) {
   return (
     <section>
       <h1>List of tutors:</h1>
-      <ul>{allTutors}</ul>
+      <ul>{tutors.map((tutor) => (
+        <TutorItem key={tutor.id} tutor={tutor}/>
+      ))}</ul>
     </section>
   );
 }

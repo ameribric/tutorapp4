@@ -1,8 +1,8 @@
 
 import React from "react";
 
-function Search({ searchTerm, onSearchChange }) {
-    
+function Search({ searchTerm, onSearchChange, tutors }) {
+    console.log(tutors)
   return (
     <div className="searchbar">
       <label htmlFor="search">Search Tutors:</label>

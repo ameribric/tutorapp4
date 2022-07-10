@@ -1,18 +1,22 @@
 // import React, { useState } from "react";
+import "./MeetingList.css"
 
 function MeetingList({ meetings, onDeleteMeeting, id}) {
   // const [updatedTime, setUpdatedTime] = useState("");
 
 
-  //THIS WORKS!!! But not dynamically, racheal said to make sure this below is connected to the backend 
+  //THIS WORKS!!! But not dynamically, maybe a solution is to make sure this is connected to the backend 
   //by making sure that the get request for meetings is linked to the backend
-  
-  function handleDeleteClick() {
-    fetch(`meetings/${meetings.id}`, {
+
+  function handleDeleteClick(id) {
+    return () => {
+    fetch(`meetings/${id}`, {
       method: "DELETE",
     });
-    onDeleteMeeting(meetings.id);
+    onDeleteMeeting(id);
   }
+  }
+
 
   // function handleTimeFormSubmit(e) {
   //   e.preventDefault();
@@ -30,14 +34,19 @@ function MeetingList({ meetings, onDeleteMeeting, id}) {
   // }
 
   return (
-    <li className="card">
-      {/* <h4>{meeting.time}</h4>
+    <ul>
+      {meetings.map(meeting =>{
+
+      
+    return <li className="card" key={meeting.id}> 
+
+      <h4>{meeting.time}</h4>
       <h4>{meeting.meeting_name}</h4>
       <h4>{meeting.location}</h4>
       <h4>{meeting.student_id}</h4>
       <h4>{meeting.tutor_id}</h4>
-  */}
-      <button onClick={handleDeleteClick}>Delete</button>
+
+      <button onClick={handleDeleteClick(meeting.id)}>Delete</button>
       {/* <form onSubmit={handleTimeFormSubmit}>
         <input
           type="text"
@@ -48,6 +57,8 @@ function MeetingList({ meetings, onDeleteMeeting, id}) {
         <button type="submit">Update Time</button>
       </form> */}
     </li>
+    })}
+    </ul>
   );
 }
 
