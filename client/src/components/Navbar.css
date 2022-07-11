@@ -1,5 +1,14 @@
-.navbar {
+.logout {
     display: inline;
-    background-color: lightcyan;
+    background-color: lightgray;
+}
 
+.signup {
+    display: inline;
+    background-color: lightgreen;
+}
+
+.login {
+    display: inline;
+    background-color: lightgoldenrodyellow;
 }

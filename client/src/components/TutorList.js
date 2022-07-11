@@ -1,7 +1,9 @@
+import './TutorList.css';
 
 function TutorItem ({ tutor }) {
     return (
-      <div>
+      <div className="tutor-item">
+        <p> Tutor ID: {tutor.id} </p>
         <p> Tutor Name: {tutor.full_name} </p>
         <p> Subject: {tutor.subject} </p>
         <p> Price: ${tutor.price} </p>

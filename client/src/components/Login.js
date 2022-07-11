@@ -31,6 +31,7 @@ function Login({ setUser }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <br></br>
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -39,6 +40,7 @@ function Login({ setUser }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br></br>
         <button type="submit">Login</button>
       </form>
     </div>

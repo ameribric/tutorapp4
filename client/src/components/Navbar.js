@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './Navbar.css';
 
 function NavBar({ user, setUser}) {
   function handleLogoutClick() {
@@ -12,18 +13,23 @@ function NavBar({ user, setUser}) {
   }
 
   return (
-    <header className="navbar">
-      <div>
-        <Link to="/logout" exact>Logout</Link>
+    <header>Welcome to Tutor App!
+        <br></br>
+      <div className="logout">
+        <Link to="/logout" exact>
+          Logout
+        </Link>
       </div>
       <div>
         {user ? (
           <button onClick={handleLogoutClick}>Logout</button>
         ) : (
           <>
-            <Link to="/signup">Signup</Link>
+            <Link className="signup" to="/signup">
+              Signup
+            </Link>
             <br></br>
-            <Link to="/login">Login</Link>
+            <Link className="login" to="/login">Login</Link>
           </>
         )}
       </div>

@@ -31,7 +31,7 @@ function MeetingList({ meetings, onDeleteMeeting, id}) {
   // }
 
   return (
-    <ul>
+    <ul>List of Meetings:
       {meetings.map(meeting =>{
 
       

@@ -36,6 +36,7 @@ function SignUp({ setUser }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <br></br>
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -44,6 +45,7 @@ function SignUp({ setUser }) {
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
+        <br></br>
         <label htmlFor="password">Password Confirmation</label>
         <input
           type="password"
@@ -52,6 +54,7 @@ function SignUp({ setUser }) {
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           autoComplete="current-password"
         />
+        <br></br>
         <button type="submit">Sign Up</button>
       </form>
     </div>

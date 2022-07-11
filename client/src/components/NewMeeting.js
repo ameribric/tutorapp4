@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import './NewMeeting.css';
 
 function NewMeeting({ onAddMeeting }) {
   const [time, setTime] = useState("");
   const [meeting_name, setMeeting_name] = useState("");
   const [location, setLocation] = useState("");
-  const [student_id, setStudent_id] = useState(0)
-  const [tutor_id, setTutor_id] = useState(0)
+  const [student_id, setStudent_id] = useState(null)
+  const [tutor_id, setTutor_id] = useState(null)
 
   function handleSubmit(e) {
     e.preventDefault();
