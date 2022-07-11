@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SignUp({ setUser }) {
+function StudentSignUp({ setUser }) {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -25,10 +25,11 @@ function SignUp({ setUser }) {
     });
   }
 
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h1>Student Sign Up</h1>
         <label htmlFor="fullName">Full Name</label>
         <input
           type="text"
@@ -71,4 +72,4 @@ function SignUp({ setUser }) {
   );
 }
 
-export default SignUp;
+export default StudentSignUp;
