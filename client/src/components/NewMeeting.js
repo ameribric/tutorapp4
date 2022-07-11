@@ -28,7 +28,7 @@ function NewMeeting({ onAddMeeting }) {
 
   return (
     <div className="new-meeting-form">
-      <h2>New Meeting</h2>
+      <h2>Add a New Meeting:</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -37,6 +37,7 @@ function NewMeeting({ onAddMeeting }) {
           value={time}
           onChange={(e) => setTime(e.target.value)}
         />
+        <br></br>
         <input
           type="text"
           name="meeting name"
@@ -44,6 +45,7 @@ function NewMeeting({ onAddMeeting }) {
           value={meeting_name}
           onChange={(e) => setMeeting_name(e.target.value)}
         />
+        <br></br>
         <input
           type="text"
           name="meeting location"
@@ -51,6 +53,7 @@ function NewMeeting({ onAddMeeting }) {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
+        <br></br>
         <input
           type="number"
           name="student_id"
@@ -58,13 +61,15 @@ function NewMeeting({ onAddMeeting }) {
           value={student_id}
           onChange={(e) => setStudent_id(e.target.value)}
         />
-          <input
+        <br></br>
+        <input
           type="number"
           name="tutor_id"
           placeholder="tutor_id"
           value={tutor_id}
           onChange={(e) => setTutor_id(e.target.value)}
         />
+        <br></br>
         <button type="submit">Add Meeting</button>
       </form>
     </div>

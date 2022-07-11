@@ -1,11 +1,14 @@
 
 function TutorItem ({ tutor }) {
     return (
-        <div >
-           <p> {tutor.full_name} </p>
-          <p> {tutor.price} </p> 
-        </div>
-    )
+      <div>
+        <p> Tutor Name: {tutor.full_name} </p>
+        <p> Subject: {tutor.subject} </p>
+        <p> Price: ${tutor.price} </p>
+        <p> Rating: {tutor.rating} </p>
+        <br></br>
+      </div>
+    );
 }
 function TutorList({ tutors }) {
     // const { id, full_name, subject, price, rating } = tutor;

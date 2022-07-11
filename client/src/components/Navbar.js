@@ -12,7 +12,7 @@ function NavBar({ user, setUser}) {
   }
 
   return (
-    <header>
+    <header className="navbar">
       <div>
         <Link to="/logout" exact>Logout</Link>
       </div>
@@ -22,6 +22,7 @@ function NavBar({ user, setUser}) {
         ) : (
           <>
             <Link to="/signup">Signup</Link>
+            <br></br>
             <Link to="/login">Login</Link>
           </>
         )}

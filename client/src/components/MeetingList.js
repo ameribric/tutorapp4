@@ -5,9 +5,6 @@ function MeetingList({ meetings, onDeleteMeeting, id}) {
   // const [updatedTime, setUpdatedTime] = useState("");
 
 
-  //THIS WORKS!!! But not dynamically, maybe a solution is to make sure this is connected to the backend 
-  //by making sure that the get request for meetings is linked to the backend
-
   function handleDeleteClick(id) {
     return () => {
     fetch(`meetings/${id}`, {

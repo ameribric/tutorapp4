@@ -77,26 +77,31 @@ function App() {
 
   return (
     <>
-      <Navbar  /> 
-      <Sidebar tutors={displayedTutors} setTutors={setTutors}/>
-      <Search tutors={displayedTutors} setTutors={setTutors} searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
-  
+      <Navbar />
+      <Search
+        tutors={displayedTutors}
+        setTutors={setTutors}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      />
+      <Sidebar tutors={displayedTutors} setTutors={setTutors} />
+
       <Main />
-      <Home user={user} /> 
+      <Home user={user} />
       <Login />
       <Signup setUser={setUser} />
-      <NewMeeting onAddMeeting={handleAddMeeting}/>
-      <Navbar  />
-      <MeetingList 
-      onDeleteMeeting={handleDeleteMeeting} 
-      onUpdateMeeting={handleUpdateMeeting}
-      meetings={meetings}
+      <NewMeeting onAddMeeting={handleAddMeeting} />
+      <Navbar />
+      <MeetingList
+        onDeleteMeeting={handleDeleteMeeting}
+        onUpdateMeeting={handleUpdateMeeting}
+        meetings={meetings}
       />
 
       <div>
-       <Switch>
+        <Switch>
           <Route path="/new">
-            <NewMeeting user={user} handleAddMeeting={handleAddMeeting}/>
+            <NewMeeting user={user} handleAddMeeting={handleAddMeeting} />
           </Route>
           <Route path="/meetinglist">
             <MeetingList />

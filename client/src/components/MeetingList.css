@@ -1,3 +1,6 @@
 .card {
     display: flex;
+    background-color: lightcyan;
+    outline-color: red;
+    flex-wrap: wrap
 }
