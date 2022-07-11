@@ -29,6 +29,14 @@ function App() {
     });
   }, []);
 
+  // useEffect(() => {
+  //   // fetch("/signup").then((r) => {
+  //   //   if (r.ok) {
+  //   //     r.json().then((user) => setUser(user));
+  //   //   }
+  //   // });
+  // }, []);
+
   useEffect(() => {
     fetch("/meetings")
       .then((r) => r.json())

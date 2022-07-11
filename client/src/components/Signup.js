@@ -2,20 +2,21 @@ import React, { useState } from "react";
 
 function SignUp({ setUser }) {
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/signup", {
+    fetch("/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        full_name: fullName,
         email,
         password,
-        password_confirmation: passwordConfirmation,
       }),
     }).then((r) => {
       if (r.ok) {
@@ -28,6 +29,15 @@ function SignUp({ setUser }) {
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Sign Up</h1>
+        <label htmlFor="fullName">Full Name</label>
+        <input
+          type="text"
+          id="fullname1"
+          autoComplete="off"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
+        <br></br>
         <label htmlFor="email">Email</label>
         <input
           type="text"

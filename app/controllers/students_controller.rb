@@ -11,7 +11,11 @@ class StudentsController < ApplicationController
 
     def create
         student = Student.create!(student_params)
-        render json: student
+        if student
+            render json: student
+        else
+            render json: {message: "Failed to create student"}
+        end
     end
 
     def update
@@ -29,7 +33,7 @@ class StudentsController < ApplicationController
     private
 
     def student_params
-        params.permit(:full_name, :email, :password, :password_confirmation)
+        params.permit(:full_name, :email, :password)
     end
 
 end
