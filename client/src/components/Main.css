@@ -1,6 +1,9 @@
 .main-screen {
     display: flex;
     background-color: lightgreen;
+    width: 1525px;
+    height: 625px;
     grid-column: 2/6;
     grid-row: 1/6;
+    border-bottom-width: 10;
 }
