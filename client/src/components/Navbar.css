@@ -12,3 +12,7 @@
     display: inline;
     background-color: lightgoldenrodyellow;
 }
+
+.app-header {
+    align-items: center;
+}

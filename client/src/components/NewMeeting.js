@@ -29,7 +29,9 @@ function NewMeeting({ onAddMeeting }) {
 
   return (
     <div className="new-meeting-form">
-      <h2>Add a New Meeting:</h2>
+      <u>
+        <h2>Add a New Meeting:</h2>
+      </u>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

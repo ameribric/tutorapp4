@@ -12,13 +12,9 @@ function TutorItem ({ tutor }) {
       </div>
     );
 }
+
 function TutorList({ tutors }) {
     // const { id, full_name, subject, price, rating } = tutor;
-
-
-
-
-
 
  
   return (

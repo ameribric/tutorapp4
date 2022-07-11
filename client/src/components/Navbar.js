@@ -14,7 +14,7 @@ function NavBar({ user, setUser}) {
 
   return (
     <header>
-      <strong>Welcome to Tutor App!</strong>
+      <strong className="app-header">Welcome to Tutor App!</strong>
       <br></br>
       <div className="logout">
         <Link to="/logout" exact>
