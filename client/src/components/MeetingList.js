@@ -31,20 +31,21 @@ function MeetingList({ meetings, onDeleteMeeting, id}) {
   // }
 
   return (
-    <ul>List of Meetings:
-      {meetings.map(meeting =>{
+    <ul className="meeting-list-header">
+      <u>
+        <strong>List of Meetings:</strong>
+      </u>
+      {meetings.map((meeting) => {
+        return (
+          <li className="card" key={meeting.id}>
+            <h4>{meeting.time}</h4>
+            <h4>{meeting.meeting_name}</h4>
+            <h4>{meeting.location}</h4>
+            <h4>{meeting.student_id}</h4>
+            <h4>{meeting.tutor_id}</h4>
 
-      
-    return <li className="card" key={meeting.id}> 
-
-      <h4>{meeting.time}</h4>
-      <h4>{meeting.meeting_name}</h4>
-      <h4>{meeting.location}</h4>
-      <h4>{meeting.student_id}</h4>
-      <h4>{meeting.tutor_id}</h4>
-
-      <button onClick={handleDeleteClick(meeting.id)}>Delete</button>
-      {/* <form onSubmit={handleTimeFormSubmit}>
+            <button onClick={handleDeleteClick(meeting.id)}>Delete</button>
+            {/* <form onSubmit={handleTimeFormSubmit}>
         <input
           type="text"
           placeholder="New time..."
@@ -53,8 +54,9 @@ function MeetingList({ meetings, onDeleteMeeting, id}) {
         />
         <button type="submit">Update Time</button>
       </form> */}
-    </li>
-    })}
+          </li>
+        );
+      })}
     </ul>
   );
 }

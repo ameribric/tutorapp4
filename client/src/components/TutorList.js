@@ -23,10 +23,14 @@ function TutorList({ tutors }) {
  
   return (
     <section>
-      <h1>List of tutors:</h1>
-      <ul>{tutors.map((tutor) => (
-        <TutorItem key={tutor.id} tutor={tutor}/>
-      ))}</ul>
+      <u>
+        <h1>List of tutors:</h1>
+      </u>
+      <ul>
+        {tutors.map((tutor) => (
+          <TutorItem key={tutor.id} tutor={tutor} />
+        ))}
+      </ul>
     </section>
   );
 }

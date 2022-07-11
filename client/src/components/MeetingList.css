@@ -4,3 +4,7 @@
     outline-color: red;
     flex-wrap: wrap
 }
+
+.meeting-list-header {
+    font-size: 22px;
+}

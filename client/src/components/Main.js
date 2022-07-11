@@ -1,7 +1,9 @@
+import './Main.css'
+
 function Main() {
 
     return (
-    <div>
+    <div className="main-screen">
         Hello, from Main!
     </div>
     );
