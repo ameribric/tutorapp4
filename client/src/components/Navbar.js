@@ -13,8 +13,9 @@ function NavBar({ user, setUser}) {
   }
 
   return (
-    <header>Welcome to Tutor App!
-        <br></br>
+    <header>
+      <strong>Welcome to Tutor App!</strong>
+      <br></br>
       <div className="logout">
         <Link to="/logout" exact>
           Logout
@@ -29,7 +30,9 @@ function NavBar({ user, setUser}) {
               Signup
             </Link>
             <br></br>
-            <Link className="login" to="/login">Login</Link>
+            <Link className="login" to="/login">
+              Login
+            </Link>
           </>
         )}
       </div>
