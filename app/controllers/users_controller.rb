@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    # before_action :authorize, only: [:create]
+    before_action :authorize, only: [:create]
 
     def show
       tutor = Tutor.find_by(id: session[:user_id])

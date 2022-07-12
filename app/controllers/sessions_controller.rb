@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+    # skip_before_action :authorized, only: [:create]
     
     def create
       student = Student.find_by(email: params[:email])
+      puts params
       tutor = Tutor.find_by(email: params[:email])
   
       if student&.authenticate(params[:password])

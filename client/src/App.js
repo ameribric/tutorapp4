@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from './components/Home'
 import Login from './components/Login'
 import StudentSignup from './components/StudentSignup'
@@ -8,9 +8,25 @@ import Navbar from './components/Navbar'
 import NewMeeting from './components/NewMeeting'
 import MeetingList from './components/MeetingList'
 import Sidebar from './components/Sidebar'
-import Main from './components/Main'
+// import Main from './components/Main'
 import Search from './components/Search'
+import ProtectedRoute from "./components/ProtectedRoute";
 
+function Main(props) {
+  console.log(props, "hello");
+  return (
+    <>
+      <Navbar />
+      <Search
+        tutors={props.tutors}
+        setTutors={props.setTutors}
+        searchTerm={props.searchTerm}
+        onSearchChange={props.setSearchTerm}
+      />
+      <Sidebar tutors={props.tutors} setTutors={props.setTutors} />
+    </>
+  );
+}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,19 +41,15 @@ function App() {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          console.log(user)
+          setUser(user)
+        })
       }
     });
   }, []);
 
-  // useEffect(() => {
-  //   // fetch("/signup").then((r) => {
-  //   //   if (r.ok) {
-  //   //     r.json().then((user) => setUser(user));
-  //   //   }
-  //   // });
-  // }, []);
-
+ 
   useEffect(() => {
     fetch("/meetings")
       .then((r) => r.json())
@@ -50,6 +62,7 @@ function App() {
     fetch("/tutors")
       .then((r) => r.json())
       .then((tutors) => {
+        console.log(tutors)
         setTutors(tutors);
       });
   }, []);
@@ -82,11 +95,11 @@ function App() {
 
 
 
-  // if (user) return <Login onLogin={setUser} />
+  // if (!user) return null
 
   return (
-    <>
-      <Navbar />
+    <div>
+      {/* <Navbar />
       <Search
         tutors={displayedTutors}
         setTutors={setTutors}
@@ -106,19 +119,33 @@ function App() {
         onDeleteMeeting={handleDeleteMeeting}
         onUpdateMeeting={handleUpdateMeeting}
         meetings={meetings}
-      />
-
+      /> */}
       <div>
-        <Switch>
-          <Route path="/new">
+        <Routes>
+          {/* <Route path="/new">
             <NewMeeting user={user} handleAddMeeting={handleAddMeeting} />
           </Route>
           <Route path="/meetinglist">
-            <MeetingList />
-          </Route>
-        </Switch>
+            <MeetingList /> */}
+          {/* </Route> */}
+
+          <Route
+            path="/main"
+            element={
+              <ProtectedRoute user={user}>
+                <Main
+                  tutors={displayedTutors}
+                  setTutors={setTutors}
+                  searchTerm={searchTerm}
+                  onSearchChange={setSearchTerm}
+                />
+              </ProtectedRoute >
+            }
+          />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </div>
-    </>
+    </div>
   );
 }
 export default App;
