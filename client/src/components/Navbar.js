@@ -5,12 +5,19 @@ import './Navbar.css';
 function NavBar({ user, setUser}) {
 
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
+    user.rating ?
+    (fetch("/tutorlogout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null); 
         
       }
-    });
+    }))
+    :
+    (fetch("/studentlogout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    }))
   }
 
   return (

@@ -15,16 +15,16 @@ import Sidebar from './components/Sidebar'
 import Search from './components/Search'
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function Main({tutors, setTutors, searchTerm, setSearchTerm}) {
+function Main({tutors, setTutors, searchTerm, setSearchTerm, user, setUser}) {
   console.log( "hello");
   return (
     <>
-      <Navbar />
+      <Navbar user={user} setUser={setUser}/>
       <Search
         tutors={tutors}
         setTutors={setTutors}
         searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
+        setSearchTerm={setSearchTerm}
       />
       <Sidebar tutors={tutors} setTutors={setTutors} />
     </>
@@ -126,7 +126,9 @@ function App() {
                 tutors={displayedTutors}
                 setTutors={setTutors}
                 searchTerm={searchTerm}
-                onSearchChange={setSearchTerm}
+                setSearchTerm={setSearchTerm}
+                user={user}
+                setUser={setUser}
               />
               <MeetingList
                 onDeleteMeeting={handleDeleteMeeting}
@@ -137,7 +139,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/studentlogin" element={<StudentLogin />} />
+        <Route path="/studentlogin" element={<StudentLogin user={user} setUser={setUser}/>} />
         <Route path="/studentlogout" element={<StudentLogout />} />
         <Route
           path="/studentsignup"

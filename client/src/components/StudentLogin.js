@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function StudentLogin({ setUser }) {
+
+function StudentLogin({ user, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,8 +16,10 @@ function StudentLogin({ setUser }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
+       window.location.replace("http://localhost:4000/main");
       }
     });
+    
   }
 
   return (

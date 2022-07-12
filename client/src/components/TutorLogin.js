@@ -15,6 +15,7 @@ function TutorLogin({ setUser }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
+        window.location.replace("http://localhost:4000/main");
       }
     });
   }
