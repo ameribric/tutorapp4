@@ -1,10 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// import "./Navbar.css";
 
 function StudentLogout({ user, setUser }) {
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
+    fetch("/studentlogout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
       }
@@ -15,12 +13,10 @@ function StudentLogout({ user, setUser }) {
     <header>
      
       <div className="studentlogout">
-        <Link to="/studentlogout" exact>
-          Student Logout
-        </Link>
+       
       </div>
       <div>
-          <button onClick={handleLogoutClick}>Logout</button>
+          <button onClick={handleLogoutClick}>Student Logout</button>
     
       </div>
     </header>

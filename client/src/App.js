@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from './components/Home'
 import StudentLogin from './components/StudentLogin'
+import StudentLogout from "./components/StudentLogout";
+import TutorLogout from "./components/TutorLogout";
 import TutorLogin from "./components/TutorLogin";
 import StudentSignup from './components/StudentSignup'
 import TutorSignup from "./components/TutorSignup";
@@ -35,20 +37,35 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [tutors, setTutors] = useState([]);
 
+  // const [homeTutor, setHomeTutor] = useState(null);
+  // const [homeStudent, setHomeStudent] = useState(null);
+    /* <Home homestudent={homeStudent} homeTutor={homeTutor}/> */
+  
 
   useEffect(() => {
     // auto-login
-    fetch("/me").then((r) => {
+    fetch("/mestudent").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user)
-          setUser(user)
-        })
+          console.log(user);
+          setUser(user);
+        });
       }
     });
   }, []);
 
- 
+  useEffect(() => {
+    // auto-login
+    fetch("/metutor").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          console.log(user);
+          setUser(user);
+        });
+      }
+    });
+  }, []);
+
   useEffect(() => {
     fetch("/meetings")
       .then((r) => r.json())
@@ -61,7 +78,7 @@ function App() {
     fetch("/tutors")
       .then((r) => r.json())
       .then((tutors) => {
-        console.log(tutors)
+        console.log(tutors);
         setTutors(tutors);
       });
   }, []);
@@ -72,8 +89,10 @@ function App() {
   }
 
   function handleDeleteMeeting(id) {
-    const updatedMeetingsArray = meetings.filter((meeting) => meeting.id !== id);
-    console.log(updatedMeetingsArray, id)
+    const updatedMeetingsArray = meetings.filter(
+      (meeting) => meeting.id !== id
+    );
+    console.log(updatedMeetingsArray, id);
     setMeetings(updatedMeetingsArray);
   }
 
@@ -91,8 +110,6 @@ function App() {
   const displayedTutors = tutors.filter((tutor) => {
     return tutor.full_name.toLowerCase().includes(searchTerm.toLowerCase());
   });
-
-
 
   // if (!user) return null
 
@@ -121,16 +138,19 @@ function App() {
           }
         />
         <Route path="/studentlogin" element={<StudentLogin />} />
-        <Route path="/tutorlogin" element={<TutorLogin />} />
-
+        <Route path="/studentlogout" element={<StudentLogout />} />
         <Route
           path="/studentsignup"
           element={<StudentSignup setUser={setUser} />}
         />
+
+        <Route path="/tutorlogin" element={<TutorLogin />} />
+        <Route path="/tutorlogout" element={<TutorLogout />} />
         <Route
           path="/tutorsignup"
           element={<TutorSignup setUser={setUser} />}
         />
+
         <Route path="/newmeeting" element={<NewMeeting />} />
         <Route
           path="/meetinglist"

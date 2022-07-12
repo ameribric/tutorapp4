@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :meetings
 
   # Student signup is in the form of create in students_controller
-  get "/me", to: "students#showingstudent"
+  get "/mestudent", to: "students#showingstudent"
   post "/studentlogin", to: "students#studentlogin"
   delete "/studentlogout", to: "students#studentlogout"
 
 
   # Tutor signup is in the form of create in tutors_controller
-  get "/me", to: "tutors#showingtutor"
+  get "/metutor", to: "tutors#showingtutor"
   post "/tutorlogin", to: "tutors#tutorlogin"
   delete "/tutorlogout", to: "tutors#tutorlogout"
 
