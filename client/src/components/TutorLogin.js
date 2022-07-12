@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-function Login({ setUser }) {
+function TutorLogin({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/login", {
+    fetch("/tutorlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,4 +47,4 @@ function Login({ setUser }) {
   );
 }
 
-export default Login;
+export default TutorLogin;

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
  
     # def authorized
     #     return render json:{error: "Not authorized"}, status: :unauthorized 
-    #   end
+    # end
 
     # IF I UNCOMMENT ABOVE, I AND DO AN INDEX GET REQUEST FOR ANY OF THE 
     # THINGS IN MY DATABASE, I GET AN ERROR THAT SAYS {error: "Not authorized"}

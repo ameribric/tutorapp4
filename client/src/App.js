@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from './components/Home'
-import Login from './components/Login'
+import StudentLogin from './components/StudentLogin'
+import TutorLogin from "./components/TutorLogin";
 import StudentSignup from './components/StudentSignup'
 import TutorSignup from "./components/TutorSignup";
 import Navbar from './components/Navbar'
@@ -12,18 +13,18 @@ import Sidebar from './components/Sidebar'
 import Search from './components/Search'
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function Main(props) {
-  console.log(props, "hello");
+function Main({tutors, setTutors, searchTerm, setSearchTerm}) {
+  console.log( "hello");
   return (
     <>
       <Navbar />
       <Search
-        tutors={props.tutors}
-        setTutors={props.setTutors}
-        searchTerm={props.searchTerm}
-        onSearchChange={props.setSearchTerm}
+        tutors={tutors}
+        setTutors={setTutors}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
       />
-      <Sidebar tutors={props.tutors} setTutors={props.setTutors} />
+      <Sidebar tutors={tutors} setTutors={setTutors} />
     </>
   );
 }
@@ -33,8 +34,6 @@ function App() {
   const [meetings, setMeetings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [tutors, setTutors] = useState([]);
-
-
 
 
   useEffect(() => {
@@ -99,52 +98,51 @@ function App() {
 
   return (
     <div>
-      {/* <Navbar />
-      <Search
-        tutors={displayedTutors}
-        setTutors={setTutors}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-      />
-      <Sidebar tutors={displayedTutors} setTutors={setTutors} />
+      <Routes>
+        <Route
+          path="/main"
+          element={
+            <ProtectedRoute user={user}>
+              <Home user={user} />
 
-      <Main />
-      <Home user={user} />
-      <Login />
-      <StudentSignup setUser={setUser} />
-      <TutorSignup setUser={setUser} />
-      <NewMeeting onAddMeeting={handleAddMeeting} />
-      <Navbar />
-      <MeetingList
-        onDeleteMeeting={handleDeleteMeeting}
-        onUpdateMeeting={handleUpdateMeeting}
-        meetings={meetings}
-      /> */}
-      <div>
-        <Routes>
-          {/* <Route path="/new">
-            <NewMeeting user={user} handleAddMeeting={handleAddMeeting} />
-          </Route>
-          <Route path="/meetinglist">
-            <MeetingList /> */}
-          {/* </Route> */}
+              <Main
+                tutors={displayedTutors}
+                setTutors={setTutors}
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+              />
+              <MeetingList
+                onDeleteMeeting={handleDeleteMeeting}
+                onUpdateMeeting={handleUpdateMeeting}
+                meetings={meetings}
+              />
+              <NewMeeting onAddMeeting={handleAddMeeting} />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/studentlogin" element={<StudentLogin />} />
+        <Route path="/tutorlogin" element={<TutorLogin />} />
 
-          <Route
-            path="/main"
-            element={
-              <ProtectedRoute user={user}>
-                <Main
-                  tutors={displayedTutors}
-                  setTutors={setTutors}
-                  searchTerm={searchTerm}
-                  onSearchChange={setSearchTerm}
-                />
-              </ProtectedRoute >
-            }
-          />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
+        <Route
+          path="/studentsignup"
+          element={<StudentSignup setUser={setUser} />}
+        />
+        <Route
+          path="/tutorsignup"
+          element={<TutorSignup setUser={setUser} />}
+        />
+        <Route path="/newmeeting" element={<NewMeeting />} />
+        <Route
+          path="/meetinglist"
+          element={
+            <MeetingList
+              onDeleteMeeting={handleDeleteMeeting}
+              onUpdateMeeting={handleUpdateMeeting}
+              meetings={meetings}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }

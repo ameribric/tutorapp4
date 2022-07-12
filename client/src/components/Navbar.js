@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import './Navbar.css';
 
 function NavBar({ user, setUser}) {
+
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -16,23 +17,38 @@ function NavBar({ user, setUser}) {
     <header>
       <strong className="app-header">Welcome to Tutor App!</strong>
       <br></br>
-      <div className="logout">
-        <Link to="/logout" exact>
-          Logout
-        </Link>
-      </div>
+      <br></br>
+
       <div>
         {user ? (
           <button onClick={handleLogoutClick}>Logout</button>
         ) : (
           <>
-            <Link className="signup" to="/signup">
-              Signup
+            <Link className="studentsignup" to="/studentsignup">
+              Student Signup
             </Link>
             <br></br>
-            <Link className="login" to="/login">
-              Login
+            <Link className="studentlogin" to="/studentlogin">
+              Student Login
             </Link>
+            <br></br>
+            <Link className="studentlogout" to="/studentlogout">
+              Student Logout
+            </Link>
+            <br></br>
+            <br></br>
+            <Link className="tutorsignup" to="/tutorsignup">
+              Tutor Signup
+            </Link>
+            <br></br>
+            <Link className="tutorlogin" to="/tutorlogin">
+              Tutor Login
+            </Link>
+            <br></br>
+            <Link className="tutorlogout" to="/tutorlogout">
+              Tutor Logout
+            </Link>
+            <br></br>
           </>
         )}
       </div>

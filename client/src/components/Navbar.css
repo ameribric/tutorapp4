@@ -3,9 +3,14 @@
     background-color: lightgray;
 }
 
-.signup {
+.studentsignup {
     display: inline;
     background-color: lightgreen;
+}
+
+.tutorsignup {
+   display: inline;
+   background-color: lightcoral; 
 }
 
 .login {
