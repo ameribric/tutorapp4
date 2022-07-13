@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import StudentLogin from "./components/StudentLogin";
 import TutorLogin from "./components/TutorLogin";
@@ -17,7 +13,7 @@ import Sidebar from "./components/Sidebar";
 import Search from "./components/Search";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function Main({ tutors, setTutors, searchTerm, setSearchTerm, user, setUser }) {
+function Main({ tutors, setTutors, students, setStudents, searchTerm, setSearchTerm, user, setUser }) {
   console.log("hello");
   return (
     <>
@@ -28,7 +24,7 @@ function Main({ tutors, setTutors, searchTerm, setSearchTerm, user, setUser }) {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
-      <Sidebar tutors={tutors} setTutors={setTutors} />
+      <Sidebar tutors={tutors} setTutors={setTutors} students={students} setStudents={setStudents}/>
     </>
   );
 }
@@ -40,11 +36,9 @@ function App() {
   const [meetings, setMeetings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [tutors, setTutors] = useState([]);
+  const [students, setStudents] = useState([]);
   const [isUserLoading, setIsUserLoading] = useState(true);
   console.log(user, "user");
-  // const [homeTutor, setHomeTutor] = useState(null);
-  // const [homeStudent, setHomeStudent] = useState(null);
-  /* <Home homestudent={homeStudent} homeTutor={homeTutor}/> */
 
   useEffect(() => {
     if (!user) {
@@ -100,6 +94,15 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch("/students")
+      .then((r) => r.json())
+      .then((students) => {
+        console.log("students", students);
+        setStudents(students);
+      });
+  }, []);
+
   function handleAddMeeting(newMeeting) {
     const updatedMeetingsArray = [...meetings, newMeeting];
     setMeetings(updatedMeetingsArray);
@@ -143,6 +146,8 @@ function App() {
               <Main
                 tutors={displayedTutors}
                 setTutors={setTutors}
+                students={students}
+                setStudents={setStudents}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 user={user}
