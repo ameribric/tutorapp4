@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./TutorLogin.css";
 
 function TutorLogin({ setUser }) {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function TutorLogin({ setUser }) {
   }
 
   return (
-    <div>
+    <div className="tutor-login-container">
       <form onSubmit={handleSubmit}>
         <h1>Tutor Login</h1>
         <label htmlFor="email">Email</label>

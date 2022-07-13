@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import './StudentLogin.css';
 
 function StudentLogin({ user, setUser }) {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ function StudentLogin({ user, setUser }) {
   }
 
   return (
-    <div>
+    <div className="student-login">
       <form onSubmit={handleSubmit}>
         <h1>Student Login</h1>
         <label htmlFor="email">Email</label>

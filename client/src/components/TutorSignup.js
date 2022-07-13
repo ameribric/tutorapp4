@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import './TutorSignup.css';
 
 function TutorSignUp({ setUser }) {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function TutorSignUp({ setUser }) {
   }
 
   return (
-    <div>
+    <div className="tutor-signup">
       <form onSubmit={handleSubmit}>
         <h1>Tutor Sign Up</h1>
         <label htmlFor="fullName">Full Name</label>
@@ -70,7 +71,7 @@ function TutorSignUp({ setUser }) {
         <br></br>
         <label htmlFor="password">Password Confirmation</label>
         <input
-          type="text"
+          type="password"
           id="password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
