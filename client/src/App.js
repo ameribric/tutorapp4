@@ -1,25 +1,30 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import Home from './components/Home'
-import StudentLogin from './components/StudentLogin'
-import StudentLogout from "./components/StudentLogout";
-import TutorLogout from "./components/TutorLogout";
+import {
+  Routes,
+  Route,
+  Outlet,
+  Link,
+  useMatch,
+  Navigate,
+} from "react-router-dom";
+import Home from "./components/Home";
+import StudentLogin from "./components/StudentLogin";
 import TutorLogin from "./components/TutorLogin";
-import StudentSignup from './components/StudentSignup'
+import StudentSignup from "./components/StudentSignup";
 import TutorSignup from "./components/TutorSignup";
-import Navbar from './components/Navbar'
-import NewMeeting from './components/NewMeeting'
-import MeetingList from './components/MeetingList'
-import Sidebar from './components/Sidebar'
+import Navbar from "./components/Navbar";
+import NewMeeting from "./components/NewMeeting";
+import MeetingList from "./components/MeetingList";
+import Sidebar from "./components/Sidebar";
 // import Main from './components/Main'
-import Search from './components/Search'
+import Search from "./components/Search";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function Main({tutors, setTutors, searchTerm, setSearchTerm, user, setUser}) {
-  console.log( "hello");
+function Main({ tutors, setTutors, searchTerm, setSearchTerm, user, setUser }) {
+  console.log("hello");
   return (
     <>
-      <Navbar user={user} setUser={setUser}/>
+      <Navbar user={user} setUser={setUser} />
       <Search
         tutors={tutors}
         setTutors={setTutors}
@@ -32,39 +37,54 @@ function Main({tutors, setTutors, searchTerm, setSearchTerm, user, setUser}) {
 }
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() =>
+    JSON.parse(window.localStorage.getItem("user"))
+  );
   const [meetings, setMeetings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [tutors, setTutors] = useState([]);
-
+  const [isUserLoading, setIsUserLoading] = useState(true);
+  console.log(user, "user");
   // const [homeTutor, setHomeTutor] = useState(null);
   // const [homeStudent, setHomeStudent] = useState(null);
-    /* <Home homestudent={homeStudent} homeTutor={homeTutor}/> */
-  
+  /* <Home homestudent={homeStudent} homeTutor={homeTutor}/> */
 
   useEffect(() => {
-    // auto-login
-    fetch("/mestudent").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => {
-          console.log(user);
-          setUser(user);
-        });
-      }
-    });
-  }, []);
+    if (!user) {
+      const user = JSON.parse(window.localStorage.getItem("user"));
+      setUser(user);
+      setIsUserLoading(false);
+    }
+  }, [user, setUser]);
 
-  useEffect(() => {
-    // auto-login
-    fetch("/metutor").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => {
-          console.log(user);
-          setUser(user);
-        });
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   // auto-login
+  //   fetch("/mestudent").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => {
+  //         console.log(user);
+  //         if(!user){
+  //           setUser(user);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   // auto-login
+  //   fetch("/metutor").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => {
+  //         console.log(user);
+  //         setUser(user);
+  //         if (!user) {
+  //           setUser(user);
+  //         }
+  //       });
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     fetch("/meetings")
@@ -111,11 +131,12 @@ function App() {
     return tutor.full_name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  // if (!user) return null
+  if (isUserLoading && !user) return <div>Loading...</div>;
 
   return (
     <div>
       <Routes>
+        <Route path="/" element={<Navigate to="/main" />} />
         <Route
           path="/main"
           element={
@@ -139,19 +160,21 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/studentlogin" element={<StudentLogin user={user} setUser={setUser}/>} />
-        <Route path="/studentlogout" element={<StudentLogout />} />
-        <Route
-          path="/studentsignup"
-          element={<StudentSignup setUser={setUser} />}
-        />
-
-        <Route path="/tutorlogin" element={<TutorLogin />} />
-        <Route path="/tutorlogout" element={<TutorLogout />} />
-        <Route
-          path="/tutorsignup"
-          element={<TutorSignup setUser={setUser} />}
-        />
+        <Route path="/login">
+          <Route
+            index
+            element={<StudentLogin user={user} setUser={setUser} />}
+          />
+          <Route
+            path="student"
+            element={<StudentLogin user={user} setUser={setUser} />}
+          />
+          <Route path="tutor" element={<TutorLogin setUser={setUser} />} />
+        </Route>
+        <Route path="/signup">
+          <Route path="student" element={<StudentSignup setUser={setUser} />} />
+          <Route path="tutor" element={<TutorSignup setUser={setUser} />} />
+        </Route>
 
         <Route path="/newmeeting" element={<NewMeeting />} />
         <Route

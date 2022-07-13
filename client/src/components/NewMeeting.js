@@ -45,7 +45,7 @@ function NewMeeting({ onAddMeeting }) {
           type="text"
           name="meeting name"
           placeholder="Meeting name"
-          value={meeting_name}
+          value={meeting_name ||''}
           onChange={(e) => setMeeting_name(e.target.value)}
         />
         <br></br>

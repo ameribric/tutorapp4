@@ -1,21 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import './Navbar.css';
 
 function NavBar({ user, setUser}) {
-
+const navigate = useNavigate()
   function handleLogoutClick() {
+    console.log(user)
     user.rating ?
     (fetch("/tutorlogout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null); 
-        
+        window.localStorage.removeItem("user");
+        setUser(null);
+        navigate("/login/tutor");
       }
     }))
     :
     (fetch("/studentlogout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        setUser(null);
+        setUser(null)
+         window.localStorage.removeItem("user");
+         setUser(null);
+         navigate("/login/student");
       }
     }))
   }

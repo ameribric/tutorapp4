@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function TutorLogin({ setUser }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,8 +16,12 @@ function TutorLogin({ setUser }) {
       body: JSON.stringify({ email, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
-        window.location.replace("http://localhost:4000/main");
+        r.json().then((user) => {
+          setUser(user);
+
+          window.localStorage.setItem("user", JSON.stringify(user));
+          navigate("/main");
+        });
       }
     });
   }
@@ -23,7 +29,7 @@ function TutorLogin({ setUser }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Tutor Login</h1>
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -43,6 +49,8 @@ function TutorLogin({ setUser }) {
         />
         <br></br>
         <button type="submit">Login</button>
+        <br></br>
+        Not a tutor? Login in as a <Link to="/login/student">student</Link>
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-
+import { Link, useNavigate } from 'react-router-dom';
 function StudentSignUp({ setUser }) {
+const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +21,11 @@ function StudentSignUp({ setUser }) {
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+        setUser(user)
+        window.localStorage.setItem("user", JSON.stringify(user));
+        navigate('/main')
+        })
       }
     });
   }
@@ -67,6 +72,10 @@ function StudentSignUp({ setUser }) {
         />
         <br></br>
         <button type="submit">Sign Up</button>
+        <br></br>
+        Already have an account? <Link to="/login/student">Login</Link>
+        <br></br>
+        Not a student? Signup as a <Link to="/signup/tutor">tutor</Link>
       </form>
     </div>
   );

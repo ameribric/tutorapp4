@@ -49,6 +49,7 @@ class StudentsController < ApplicationController
 
     def studentlogout
         session.delete :user_id
+        session[:user_id] = nil
         head :no_content
     end
 
