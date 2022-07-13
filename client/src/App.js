@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import {
   Routes,
   Route,
-  Outlet,
-  Link,
-  useMatch,
   Navigate,
 } from "react-router-dom";
 import Home from "./components/Home";

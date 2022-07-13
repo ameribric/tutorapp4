@@ -10,7 +10,7 @@ return (
 
 
     <div className="sidebar">
-        Hello, from Sidebar!
+        {/* Hello, from Sidebar! */}
     </div>
     
     </>
