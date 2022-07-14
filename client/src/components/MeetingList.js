@@ -44,9 +44,7 @@ function MeetingItem(props) {
       <button onClick={handleDeleteClick(meeting.id)}>Delete</button>
       <form onSubmit={handleUpdateTimeSubmit(meeting.id)}>
         <input
-          min="00:00"
-          max="24:00"
-          type="time"
+          type="text"
           placeholder="New time..."
           value={updatedTime}
           onChange={(e) => setUpdatedTime(e.target.value)}
