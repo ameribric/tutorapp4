@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import './TutorSignup.css';
+import "./TutorSignup.css";
 
 function TutorSignUp({ setUser }) {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ function TutorSignUp({ setUser }) {
   const [subject, setSubject] = useState("");
   const [price, setPrice] = useState(null);
   const [rating, setRating] = useState(null);
+  const [error, setError] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,10 +35,15 @@ function TutorSignUp({ setUser }) {
           window.localStorage.setItem("user", JSON.stringify(user));
           navigate("/main");
         });
+      } else {
+        r.json().then((error) => {
+          setError(error.errors);
+          console.log(error);
+        });
       }
     });
   }
-
+  console.log(error);
   return (
     <div className="tutor-signup">
       <form onSubmit={handleSubmit}>
@@ -108,6 +114,8 @@ function TutorSignUp({ setUser }) {
         <br></br>
         Not a tutor? Signup as a <Link to="/signup/student">student</Link>
       </form>
+      <br></br>
+      {error ? <em>{error}</em> : null}
     </div>
   );
 }

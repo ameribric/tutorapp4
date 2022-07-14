@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import './StudentLogin.css';
+import "./StudentLogin.css";
 
 function StudentLogin({ user, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState([]);
 
   const navigate = useNavigate();
 
@@ -22,6 +23,11 @@ function StudentLogin({ user, setUser }) {
           setUser(user);
           window.localStorage.setItem("user", JSON.stringify(user));
           navigate("/main");
+        });
+      } else {
+        r.json().then((user) => {
+          setError(user.error);
+          console.log(user.error);
         });
       }
     });
@@ -55,6 +61,8 @@ function StudentLogin({ user, setUser }) {
         <br></br>
         Not a student? Login in as a <Link to="/login/tutor">tutor</Link>
       </form>
+      <br></br>
+      <em>{error}</em>
     </div>
   );
 }

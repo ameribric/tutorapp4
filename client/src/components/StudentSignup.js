@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import './StudentSignup.css';
+import { Link, useNavigate } from "react-router-dom";
+import "./StudentSignup.css";
 function StudentSignUp({ setUser }) {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,14 +24,18 @@ const navigate = useNavigate()
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-        setUser(user)
-        window.localStorage.setItem("user", JSON.stringify(user));
-        navigate('/main')
-        })
+          setUser(user);
+          window.localStorage.setItem("user", JSON.stringify(user));
+          navigate("/main");
+        });
+      } else {
+        r.json().then((user) => {
+          setError(user.errors);
+          console.log(user.errors);
+        });
       }
     });
   }
-
 
   return (
     <div className="student-signup">
@@ -78,6 +83,8 @@ const navigate = useNavigate()
         <br></br>
         Not a student? Signup as a <Link to="/signup/tutor">tutor</Link>
       </form>
+      <br></br>
+      {error ? <em>{error}</em> : null}
     </div>
   );
 }

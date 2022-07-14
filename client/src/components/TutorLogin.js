@@ -6,6 +6,7 @@ function TutorLogin({ setUser }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -22,6 +23,11 @@ function TutorLogin({ setUser }) {
 
           window.localStorage.setItem("user", JSON.stringify(user));
           navigate("/main");
+        });
+      } else {
+        r.json().then((user) => {
+          setError(user.error);
+          console.log(user.error);
         });
       }
     });
@@ -53,6 +59,8 @@ function TutorLogin({ setUser }) {
         <br></br>
         Not a tutor? Login in as a <Link to="/login/student">student</Link>
       </form>
+      <br></br>
+      <em>{error}</em>
     </div>
   );
 }
