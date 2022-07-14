@@ -13,7 +13,16 @@ import Sidebar from "./components/Sidebar";
 import Search from "./components/Search";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function Main({ tutors, setTutors, students, setStudents, searchTerm, setSearchTerm, user, setUser }) {
+function Main({
+  tutors,
+  setTutors,
+  students,
+  setStudents,
+  searchTerm,
+  setSearchTerm,
+  user,
+  setUser,
+}) {
   console.log("hello");
   return (
     <>
@@ -24,9 +33,18 @@ function Main({ tutors, setTutors, students, setStudents, searchTerm, setSearchT
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
-      <Sidebar tutors={tutors} setTutors={setTutors} students={students} setStudents={setStudents}/>
+      <Sidebar
+        tutors={tutors}
+        setTutors={setTutors}
+        students={students}
+        setStudents={setStudents}
+      />
     </>
   );
+}
+
+function fetchMeetings() {
+  return fetch("/meetings").then((r) => r.json());
 }
 
 function App() {
@@ -78,11 +96,12 @@ function App() {
   // }, []);
 
   useEffect(() => {
-    fetch("/meetings")
-      .then((r) => r.json())
-      .then((meetingsArray) => {
-        setMeetings(meetingsArray);
+    fetchMeetings().then((meetingsArray) => {
+      const sortedMeetings = meetingsArray.sort((meetingA, meetingB) => {
+        return new Date(meetingB.time) - new Date(meetingA.time);
       });
+      setMeetings(sortedMeetings);
+    });
   }, []);
 
   useEffect(() => {
@@ -116,15 +135,13 @@ function App() {
     setMeetings(updatedMeetingsArray);
   }
 
-  function handleUpdateMeeting(updatedMeeting) {
-    const updatedMeetingsArray = meetings.map((meeting) => {
-      if (meeting.id === updatedMeeting.id) {
-        return updatedMeeting;
-      } else {
-        return meeting;
-      }
+  function handleUpdateMeeting() {
+    fetchMeetings().then((meetingsArray) => {
+      const sortedMeetings = meetingsArray.sort((meetingA, meetingB) => {
+        return new Date(meetingB.time) - new Date(meetingA.time);
+      });
+      setMeetings(sortedMeetings);
     });
-    setMeetings(updatedMeetingsArray);
   }
 
   const displayedTutors = tutors.filter((tutor) => {
